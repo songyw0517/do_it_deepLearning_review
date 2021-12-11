@@ -1,3 +1,6 @@
+'''
+당뇨병 환자 데이터셋 사용
+'''
 class Neuron:
   def __init__(self):
     # 초기화 작업 수행
@@ -27,3 +30,24 @@ class Neuron:
         w_grad, b_grad = self.backprop(x_i, err) # 역방향 계산
         self.w -= w_grad          # 가중치 업데이트
         self.b -= b_grad          # 절편 업데이트
+
+# 데이터 준비
+from sklearn.datasets import load_diabetes
+diabetes = load_diabetes()
+x = diabetes.data[:, 2]
+y = diabetes.target
+
+# 뉴런 생성 및 훈련
+neuron = Neuron()
+neuron.fit(x,y)
+
+# 그래프로 확인
+import matplotlib.pyplot as plt
+
+plt.scatter(x, y)
+pt1 = (-0.1, -0.1 * neuron.w + neuron.b)
+pt2 = (0.15, 0.15 * neuron.w + neuron.b)
+plt.plot([pt1[0], pt2[0]],[pt1[1], pt2[1]])
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
