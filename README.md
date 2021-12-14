@@ -60,4 +60,23 @@
     - $z = \frac{x-\mu}{s}$
     - 반드시 '훈련데이터 세트의 평균, 표준편차'만을 이용하여 '검증 데이터 세트'와 '테스트 데이터 세트'의 표준화를 진행해야한다.
 
-# 데이터 분석 및 조정
+# 일반적인 딥러닝 과정
+1. 모델 과대적합
+    - 모델이 과대적합이 되었는지 확인하는 과정 
+    - (에포크, 손실 함수의 그래프로 확인)
+2. 규제를 통한 적절한 모델로 조정
+
+# 규제
+- 가중치가 작을수록 일반화가 좋다.
+- 규제를 통해 가중치를 작게 할 수 있다.
+## 규제의 종류
+- L1 규제 (라쏘 - Lasso)
+    - L1 노름 = $\vert\vert{w}\vert\vert_1 = \sum\limits_{i=1}^{n}\vert{w_i}\vert$
+    - $L = -(y\log(a) + (1-y)\log(1-a)) + α\sum\limits_{i=1}^{n}\vert{w_i}\vert$
+    - $\frac{\delta}{\delta w}L = -(y-a)x + α * sign(w)$
+    - <code> w_grad += alpha * np.sign(w)</code>
+- L2 규제
+    - L2노름(유클리드 거리) = $\vert\vert{w}\vert\vert_2 = \sqrt{\sum\limits_{i=1}^{n}\vert{w_i}\vert^2}$
+    - $L = -(y\log(a) + (1-y)\log(1-a)) + \frac{1}{2}α\sum\limits_{i=l}^{n}\vert{w_i}\vert^2$ 
+    - $\frac{\delta}{\delta w}L = -(y-a)x + α * w$
+    - <code>w_grad += alpha * w</code>

@@ -30,7 +30,7 @@ class SingleLayer:
             indexes = np.random.permutation(np.arange(len(x)))            # 확률적 경사하강법을 적용하기 위한 인덱스 섞기
             for i in indexes:
                 z = self.forpass(x[i])       # 정방향 계산
-                a = self.activiation(z)     # 활성화 함수 적용
+                a = self.activation(z)     # 활성화 함수 적용
                 err = -(y[i] - a)            # 오차 계산
                 w_grad, b_grad = self.backprop(x[i], err) # 역방향 계산
                 self.w -= w_grad            # 가중치 업데이트
@@ -41,14 +41,14 @@ class SingleLayer:
                 loss += -(y[i]*np.log(a)+(1-y[i])*np.log(1-a))
             self.losses.append(loss/len(y))
     
-    def activiation(self, z):
+    def activation(self, z):
         z = np.clip(z, -100, None)          # 안전한 np.exp() 계산을 위한 clip함수
         a = 1 / (1 + np.exp(-z))            # 시그모이드 계산
         return a
     
     def predict(self, x):
         z = [self.forpass(x_i) for x_i in x]    # 선형 함수 적용
-                                                                            # a = self.activiation(np.array(z))       # 활성화 함수를 뺌
+                                                                            # a = self.activation(np.array(z))       # 활성화 함수를 뺌
         return np.array(z) > 0                  # 계단 함수 적용
     
     def score(self, x, y):                                                  # 성능을 보여주는 메서드

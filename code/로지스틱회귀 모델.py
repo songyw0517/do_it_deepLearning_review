@@ -24,20 +24,20 @@ class LogisticNeuron:
         for i in range(epochs):             # epochs만큼 반복합니다.
             for x_i, y_i in zip(x, y):      # 모든 샘플에 대해 반복합니다.
                 z = self.forpass(x_i)       # 정방향 계산
-                a = self.activiation(z)     # 활성화 함수 적용
+                a = self.activation(z)     # 활성화 함수 적용
                 err = -(y_i - a)            # 오차 계산
                 w_grad, b_grad = self.backprop(x_i, err) # 역방향 계산
                 self.w -= w_grad            # 가중치 업데이트
                 self.b -= b_grad            # 절편 업데이트
     
-    def activiation(self, z):
+    def activation(self, z):
         z = np.clip(z, -100, None)          # 안전한 np.exp() 계산을 위한 clip함수
         a = 1 / (1 + np.exp(-z))            # 시그모이드 계산
         return a
     
     def predict(self, x):
         z = [self.forpass(x_i) for x_i in x]    # 선형 함수 적용
-        a = self.activiation(np.array(z))       # 활성화 함수 적용
+        a = self.activation(np.array(z))       # 활성화 함수 적용
         return a > 0.5                          # 계단 함수 적용
 
 # 데이터 준비
