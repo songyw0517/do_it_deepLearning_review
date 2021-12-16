@@ -86,8 +86,7 @@ cancer = load_breast_cancer()
 x = cancer.data
 y = cancer.target
 
-# 데이터 나누기 (훈련 세트, 테스트 세트)
-x_train_all, x_test, y_train_all, y_test = train_test_split(x, y, stratify=y, test_size=0.2, random_state=42)
+ 
 
 # 교차 검증 구현
 validation_scores = []
