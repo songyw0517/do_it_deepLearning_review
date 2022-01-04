@@ -61,7 +61,7 @@ class SingleLayer:
     def score(self, x, y):                      # 성능을 보여주는 메서드
         return np.mean(self.predict(x) == y)
     def update_val_loss(self, x_val, y_val):                                    # 검증 세트 손실을 업데이트
-        '''
+        ''' 
         만들어진 모델에 대해 검증 세트(전부)로 손실을 계산한 후 평균을 낸다
         '''
         if x_val is None:
